@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Home", to: "/" },
   { label: "Meet Jaime", to: "/meet-jaime" },
   { label: "Priorities", to: "/priorities" },
+  { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
   { label: "Voting", to: "/voting" },
 ];
@@ -20,6 +21,10 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!transparent) return;
@@ -43,15 +48,26 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
         <Link
           to="/"
           className={cn(
-            "font-display text-xl font-bold transition-colors duration-200",
+            "font-display font-bold transition-colors duration-200 flex items-center gap-3",
             isTransparent ? "text-primary-foreground" : "text-foreground"
           )}
         >
-          Jaime Boucher
+          <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">JB</span>
+          </div>
+          <div>
+            <span className="text-lg leading-none block">Jamison Boucher</span>
+            <span className={cn(
+              "text-[10px] uppercase tracking-[0.15em] leading-none",
+              isTransparent ? "text-primary-foreground/50" : "text-muted-foreground"
+            )}>
+              Selectman
+            </span>
+          </div>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -77,7 +93,7 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
         {/* Mobile toggle */}
         <button
           className={cn(
-            "md:hidden p-2 rounded-md transition-colors",
+            "lg:hidden p-2 rounded-md transition-colors",
             isTransparent ? "text-primary-foreground" : "text-foreground"
           )}
           onClick={() => setOpen(!open)}
@@ -90,8 +106,8 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
       {/* Mobile menu */}
       <div
         className={cn(
-          "md:hidden overflow-hidden transition-all duration-300 bg-background/95 backdrop-blur-md",
-          open ? "max-h-96 border-b border-border" : "max-h-0"
+          "lg:hidden overflow-hidden transition-all duration-300 bg-background/95 backdrop-blur-md",
+          open ? "max-h-[500px] border-b border-border" : "max-h-0"
         )}
       >
         <div className="container mx-auto py-3 space-y-1">
