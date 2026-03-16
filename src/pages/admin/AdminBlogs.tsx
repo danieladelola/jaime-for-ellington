@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, X, Upload, Eye, PenLine } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload, Eye, PenLine, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Blog = {
