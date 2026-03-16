@@ -10,6 +10,7 @@ import Priorities from "./pages/Priorities";
 import Contact from "./pages/Contact";
 import Voting from "./pages/Voting";
 import Volunteer from "./pages/Volunteer";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
