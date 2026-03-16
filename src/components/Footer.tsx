@@ -80,7 +80,7 @@ const Footer = () => (
     <div className="border-t border-background/10">
       <div className="container mx-auto py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-background/35">
         <p>© {new Date().getFullYear()} Jamison Boucher for Ellington. All rights reserved.</p>
-        <p>Paid for by Friends of Jamison Boucher</p>
+        
       </div>
     </div>
   </footer>
