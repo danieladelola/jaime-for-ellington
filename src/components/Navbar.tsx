@@ -10,7 +10,6 @@ const navLinks = [
   { label: "Priorities", to: "/priorities" },
   { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
-  { label: "Voting", to: "/voting" },
 ];
 
 interface NavbarProps {
@@ -85,9 +84,6 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
               {link.label}
             </Link>
           ))}
-          <Button variant="default" size="sm" className="ml-3" asChild>
-            <Link to="/volunteer">Volunteer</Link>
-          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -125,11 +121,6 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
               {link.label}
             </Link>
           ))}
-          <div className="pt-2 px-3">
-            <Button variant="default" size="sm" className="w-full" asChild>
-              <Link to="/volunteer" onClick={() => setOpen(false)}>Volunteer</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </nav>

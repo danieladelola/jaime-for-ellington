@@ -50,9 +50,7 @@ const Footer = () => (
           <h4 className="font-display font-semibold mb-4 text-sm uppercase tracking-wider text-background/40">Get Involved</h4>
           <div className="flex flex-col gap-3 text-sm">
             {[
-              { to: "/volunteer", label: "Volunteer" },
               { to: "/contact", label: "Contact Jaime" },
-              { to: "/voting", label: "Voting Info" },
             ].map((link) => (
               <Link key={link.to} to={link.to} className="text-background/60 hover:text-background transition-colors flex items-center gap-1 group">
                 <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200" />

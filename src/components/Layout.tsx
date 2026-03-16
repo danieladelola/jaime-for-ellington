@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import MobileActionBar from "./MobileActionBar";
 
 const Layout = () => {
   const location = useLocation();
@@ -14,8 +13,6 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
-      <MobileActionBar />
-      <div className="h-14 md:hidden" />
     </div>
   );
 };
