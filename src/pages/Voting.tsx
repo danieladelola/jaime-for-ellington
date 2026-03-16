@@ -21,40 +21,43 @@ const infoCards = [
 
 const Voting = () => (
   <div>
-    <section className="bg-primary py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-display font-extrabold text-primary-foreground">
+    <section className="pt-28 pb-16 bg-muted">
+      <div className="container mx-auto text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-4xl md:text-5xl font-display font-bold text-foreground"
+        >
           Voting Information
-        </h1>
-        <p className="text-primary-foreground/75 mt-3 text-lg">Make your voice heard in Ellington</p>
+        </motion.h1>
+        <p className="text-muted-foreground mt-3 text-lg">Make your voice heard in Ellington</p>
       </div>
     </section>
 
-    <section className="py-16 bg-background">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="grid gap-8">
-          {infoCards.map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-card border border-border rounded-lg p-8 flex gap-6 items-start"
-            >
-              <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                <card.icon className="w-7 h-7 text-accent" />
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">{card.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{card.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+    <section className="py-20 bg-background">
+      <div className="container mx-auto max-w-3xl space-y-6">
+        {infoCards.map((card, i) => (
+          <motion.div
+            key={card.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08, duration: 0.4 }}
+            className="group flex gap-6 items-start p-8 rounded-lg border border-border bg-card hover:border-secondary/30 hover:shadow-md transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/20 transition-colors duration-300">
+              <card.icon className="w-6 h-6 text-secondary" />
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-bold text-foreground mb-2">{card.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{card.description}</p>
+            </div>
+          </motion.div>
+        ))}
 
-        <div className="mt-12 bg-muted rounded-lg p-8 text-center">
-          <h3 className="font-display text-xl font-bold text-foreground mb-3">Need Help?</h3>
+        <div className="mt-12 rounded-lg bg-muted p-8 text-center">
+          <h3 className="font-display text-lg font-bold text-foreground mb-3">Need Help?</h3>
           <p className="text-muted-foreground mb-2">
             Contact Ellington Town Hall for voting questions and registration assistance.
           </p>
@@ -64,7 +67,7 @@ const Voting = () => (
               href="https://portal.ct.gov/sots"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent font-medium hover:underline"
+              className="text-secondary font-medium hover:underline"
             >
               CT Secretary of State
             </a>{" "}
