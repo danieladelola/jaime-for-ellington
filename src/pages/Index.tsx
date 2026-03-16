@@ -281,44 +281,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-24 md:py-32 bg-background">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16 max-w-2xl mx-auto"
-          >
-            <p className="text-primary font-display font-semibold text-sm uppercase tracking-[0.15em] mb-3">Journey</p>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
-              A Record of Service
-            </h2>
-          </motion.div>
-          <div className="max-w-2xl mx-auto relative">
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-border" />
-            {timeline.map((item, i) => (
-              <motion.div
-                key={item.year}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="relative flex items-start gap-8 mb-12 last:mb-0"
-              >
-                <div className="relative z-10 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 border-4 border-background">
-                  <span className="font-display font-bold text-primary text-sm">{item.year}</span>
-                </div>
-                <div className="pt-3">
-                  <p className="font-display font-semibold text-foreground text-lg">{item.event}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Quote */}
       <section className="py-24 md:py-32 bg-muted relative overflow-hidden">
