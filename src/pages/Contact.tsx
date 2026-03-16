@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Clock, Phone, Send, MessageSquare } from "lucide-react";
 
@@ -27,8 +28,17 @@ const topics = [
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { error } = await supabase.from("contacts").insert({
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    });
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
     toast.success("Thank you! Your message has been sent to Jaime.");
     setForm({ name: "", email: "", phone: "", topic: "", message: "" });
   };
