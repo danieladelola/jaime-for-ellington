@@ -24,43 +24,38 @@ const items = [
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.12, duration: 0.5 },
-  }),
-};
-
 const Priorities = () => (
   <div>
-    <section className="bg-primary py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-display font-extrabold text-primary-foreground">
+    <section className="pt-28 pb-16 bg-muted">
+      <div className="container mx-auto text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-4xl md:text-5xl font-display font-bold text-foreground"
+        >
           Priorities
-        </h1>
-        <p className="text-primary-foreground/75 mt-3 text-lg">What I'm fighting for in Ellington</p>
+        </motion.h1>
+        <p className="text-muted-foreground mt-3 text-lg">What I'm fighting for in Ellington</p>
       </div>
     </section>
 
-    <section className="py-16 bg-background">
-      <div className="container mx-auto px-4 max-w-4xl space-y-8">
+    <section className="py-20 bg-background">
+      <div className="container mx-auto max-w-3xl space-y-6">
         {items.map((item, i) => (
           <motion.div
             key={item.title}
-            custom={i}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={fadeUp}
-            className="bg-card border border-border rounded-lg p-8 flex gap-6 items-start hover:shadow-lg transition-shadow"
+            transition={{ delay: i * 0.08, duration: 0.4 }}
+            className="group flex gap-6 items-start p-8 rounded-lg border border-border bg-card hover:border-primary/20 hover:shadow-md transition-all duration-300"
           >
-            <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-              <item.icon className="w-7 h-7 text-accent" />
+            <div className="w-12 h-12 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors duration-300">
+              <item.icon className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="font-display text-xl font-bold text-foreground mb-2">{item.title}</h3>
+              <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.title}</h3>
               <p className="text-muted-foreground leading-relaxed">{item.description}</p>
             </div>
           </motion.div>
