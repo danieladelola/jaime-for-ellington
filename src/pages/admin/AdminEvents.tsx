@@ -94,7 +94,7 @@ const AdminEvents = () => {
     };
 
     if (editingId) {
-      const { error } = await supabase.from("events").update(payload).eq("id", editingId);
+      const { error } = await (supabase as any).from("events").update(payload).eq("id", editingId);
       if (error) toast.error("Failed to update event");
       else toast.success("Event updated");
     } else {
