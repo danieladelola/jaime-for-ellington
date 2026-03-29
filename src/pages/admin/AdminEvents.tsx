@@ -42,11 +42,11 @@ const AdminEvents = () => {
   const [saving, setSaving] = useState(false);
 
   const fetchEvents = async () => {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("events")
       .select("*")
       .order("event_date", { ascending: false });
-    if (!error && data) setEvents(data as unknown as EventRow[]);
+    if (!error && data) setEvents(data as EventRow[]);
     setLoading(false);
   };
 
