@@ -225,7 +225,7 @@ const Voting = () => (
                   to="/contact"
                   className="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline"
                 >
-                  Contact Jaime <ArrowRight className="w-3 h-3" />
+                  Contact Jamie <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
             </div>
