@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapPin, Mail, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-jaime.jpg";
-import meetingImage from "@/assets/jaime-meeting.jpg";
+import heroImage from "@/assets/hero-jamie.jpg";
+import meetingImage from "@/assets/jamie-meeting.jpg";
 
 const priorities = [
   {
@@ -193,7 +193,7 @@ const Index = () => {
               </div>
 
               <Button variant="default" size="lg" asChild>
-                <Link to="/meet-jaime">
+                <Link to="/meet-jamie">
                   Read Full Bio <ChevronRight className="ml-1 w-4 h-4" />
                 </Link>
               </Button>

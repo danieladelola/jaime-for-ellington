@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Award, Users, Shield, BookOpen, Heart, MapPin, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
-import portrait from "@/assets/jaime-portrait.jpg";
-import meetingImage from "@/assets/jaime-meeting.jpg";
+import portrait from "@/assets/jamie-portrait.jpg";
+import meetingImage from "@/assets/jamie-meeting.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },

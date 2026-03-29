@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
-import MeetJaime from "./pages/MeetJaime";
+import MeetJamie from "./pages/MeetJamie";
 import Priorities from "./pages/Priorities";
 import Contact from "./pages/Contact";
 import Voting from "./pages/Voting";
@@ -31,7 +31,7 @@ const App = () => (
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
-            <Route path="/meet-jaime" element={<MeetJaime />} />
+            <Route path="/meet-jamie" element={<MeetJamie />} />
             <Route path="/priorities" element={<Priorities />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
