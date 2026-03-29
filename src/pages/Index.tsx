@@ -4,6 +4,7 @@ import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapP
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-jamie.jpg";
 import meetingImage from "@/assets/jamie-meeting.jpg";
+import EventsSection from "@/components/EventsSection";
 
 const priorities = [
   {
@@ -264,6 +265,8 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Events */}
+      <EventsSection />
 
 
       {/* Quote */}
