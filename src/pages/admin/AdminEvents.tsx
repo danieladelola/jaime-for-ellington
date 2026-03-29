@@ -98,7 +98,7 @@ const AdminEvents = () => {
       if (error) toast.error("Failed to update event");
       else toast.success("Event updated");
     } else {
-      const { error } = await supabase.from("events").insert(payload as any);
+      const { error } = await (supabase as any).from("events").insert(payload);
       if (error) toast.error("Failed to create event");
       else toast.success("Event created");
     }
