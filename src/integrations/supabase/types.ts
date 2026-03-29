@@ -71,6 +71,48 @@ export type Database = {
         }
         Relationships: []
       }
+      events: {
+        Row: {
+          created_at: string
+          event_date: string
+          event_time: string | null
+          featured_image: string | null
+          full_description: string | null
+          id: string
+          location: string | null
+          short_description: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_date: string
+          event_time?: string | null
+          featured_image?: string | null
+          full_description?: string | null
+          id?: string
+          location?: string | null
+          short_description?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_date?: string
+          event_time?: string | null
+          featured_image?: string | null
+          full_description?: string | null
+          id?: string
+          location?: string | null
+          short_description?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
