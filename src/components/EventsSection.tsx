@@ -20,7 +20,7 @@ const EventsSection = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data } = await supabase
+      const { data } = await (supabase as any)
         .from("events")
         .select("id, title, short_description, event_date, event_time, location, featured_image")
         .eq("status", "published")
