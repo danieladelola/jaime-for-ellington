@@ -157,7 +157,7 @@ const Blog = () => {
           >
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">Stay Informed</h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Follow Jaime's campaign for regular updates on town meetings, policy decisions, and community events.
+              Follow Jamie's campaign for regular updates on town meetings, policy decisions, and community events.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="default" size="lg" asChild>

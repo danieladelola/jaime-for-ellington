@@ -15,7 +15,7 @@ const items = [
   {
     icon: Zap,
     title: "Fought Rising Utility Costs",
-    description: "Attended PURA public hearing and confronted Connecticut Water Co. over a proposed 18% rate hike to fight for Ellington residents. Utility costs directly impact family budgets and Jaime continues to push back against unreasonable increases.",
+    description: "Attended PURA public hearing and confronted Connecticut Water Co. over a proposed 18% rate hike to fight for Ellington residents. Utility costs directly impact family budgets and Jamie continues to push back against unreasonable increases.",
     actions: [
       "Attended PURA public hearings",
       "Confronted Connecticut Water Co. directly",
@@ -179,7 +179,7 @@ const Priorities = () => (
           className="max-w-xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground mb-4">Share Your Priorities</h2>
-          <p className="text-primary-foreground/65 mb-8">What matters most to you in Ellington? Let Jaime know.</p>
+          <p className="text-primary-foreground/65 mb-8">What matters most to you in Ellington? Let Jamie know.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-display font-bold" asChild>
               <Link to="/contact">Share Your Voice <ArrowRight className="ml-2 w-4 h-4" /></Link>

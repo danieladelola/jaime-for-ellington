@@ -28,7 +28,7 @@ const involvement = [
   { icon: Shield, title: "Union Leadership", desc: "Vice President, Professional Employees Union Local 818 (AFSCME), advocating for workers' rights." },
 ];
 
-const MeetJaime = () => (
+const MeetJamie = () => (
   <div>
     {/* Hero Banner */}
     <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 bg-foreground overflow-hidden">
@@ -44,7 +44,7 @@ const MeetJaime = () => (
           >
             <p className="text-primary font-display font-semibold text-sm uppercase tracking-[0.15em] mb-4">About</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-6">
-              Meet <span className="text-primary">Jamison</span> Boucher
+              Meet <span className="text-primary">Jamie</span> Boucher
             </h1>
             <p className="text-primary-foreground/60 text-lg leading-relaxed mb-4">
               Selectman · Lifelong Ellington Resident · Community Leader
@@ -59,7 +59,7 @@ const MeetJaime = () => (
           >
             <img
               src={portrait}
-              alt="Jamison Boucher - Selectman"
+              alt="Jamie Boucher - Selectman"
               className="rounded-xl w-full max-w-md mx-auto object-cover aspect-[4/3] shadow-2xl"
             />
             <div className="absolute -bottom-4 -left-4 bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-xl hidden md:block">
@@ -105,7 +105,7 @@ const MeetJaime = () => (
               <p className="italic text-foreground/80 text-xl leading-relaxed font-display">
                 "My focus remains simple: advance common-sense policies that best support our residents, strengthen our local businesses and farms, and back initiatives that make Ellington a place where families can grow."
               </p>
-              <cite className="text-muted-foreground text-sm mt-4 block not-italic">— Jamison Boucher, Selectman</cite>
+              <cite className="text-muted-foreground text-sm mt-4 block not-italic">— Jamie Boucher, Selectman</cite>
             </blockquote>
 
             <Button variant="default" size="lg" asChild>
@@ -162,7 +162,7 @@ const MeetJaime = () => (
 
             <img
               src={meetingImage}
-              alt="Jaime at a board meeting"
+              alt="Jamie at a board meeting"
               className="rounded-xl w-full object-cover aspect-[4/3] shadow-lg"
             />
           </motion.div>
@@ -261,7 +261,7 @@ const MeetJaime = () => (
               <Link to="/volunteer">Volunteer Now</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact">Contact Jaime</Link>
+              <Link to="/contact">Contact Jamie</Link>
             </Button>
           </div>
         </motion.div>
@@ -270,4 +270,4 @@ const MeetJaime = () => (
   </div>
 );
 
-export default MeetJaime;
+export default MeetJamie;

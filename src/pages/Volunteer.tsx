@@ -16,7 +16,7 @@ const fadeUp = {
 };
 
 const roles = [
-  { icon: Users, title: "Door Knocking", desc: "Go door-to-door in your neighborhood sharing Jaime's vision for Ellington. Training and materials provided.", color: "primary" },
+  { icon: Users, title: "Door Knocking", desc: "Go door-to-door in your neighborhood sharing Jamie's vision for Ellington. Training and materials provided.", color: "primary" },
   { icon: Megaphone, title: "Phone Banking", desc: "Call fellow Ellington residents from the comfort of your home. Scripts and call lists provided.", color: "primary" },
   { icon: Heart, title: "Community Events", desc: "Help organize and run campaign events, town halls, and community gatherings.", color: "primary" },
   { icon: MapPin, title: "Yard Signs", desc: "Display a campaign yard sign at your home to show your support and build visibility.", color: "primary" },
@@ -26,8 +26,8 @@ const roles = [
 
 const testimonials = [
   { name: "Sarah M.", role: "Door Knocking Volunteer", quote: "Being part of this campaign has been incredibly rewarding. The team is welcoming and the mission is clear." },
-  { name: "Tom R.", role: "Event Volunteer", quote: "Jaime genuinely listens to residents. Volunteering for his campaign feels like investing in our community's future." },
-  { name: "Linda K.", role: "Phone Bank Volunteer", quote: "I've never volunteered for a campaign before, but Jaime's dedication to Ellington inspired me to get involved." },
+  { name: "Tom R.", role: "Event Volunteer", quote: "Jamie genuinely listens to residents. Volunteering for his campaign feels like investing in our community's future." },
+  { name: "Linda K.", role: "Phone Bank Volunteer", quote: "I've never volunteered for a campaign before, but Jamie's dedication to Ellington inspired me to get involved." },
 ];
 
 const Volunteer = () => {
@@ -236,7 +236,7 @@ const Volunteer = () => {
                 <Link to="/priorities">Explore Priorities <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact">Contact Jaime</Link>
+                <Link to="/contact">Contact Jamie</Link>
               </Button>
             </div>
           </motion.div>
