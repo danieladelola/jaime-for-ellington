@@ -39,7 +39,7 @@ const Contact = () => {
       toast.error("Something went wrong. Please try again.");
       return;
     }
-    toast.success("Thank you! Your message has been sent to Jaime.");
+    toast.success("Thank you! Your message has been sent to Jamie.");
     setForm({ name: "", email: "", phone: "", topic: "", message: "" });
   };
 
@@ -54,10 +54,10 @@ const Contact = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <p className="text-primary font-display font-semibold text-sm uppercase tracking-[0.15em] mb-4">Get In Touch</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground mb-6">
-              Contact <span className="text-primary">Jaime</span>
+              Contact <span className="text-primary">Jamie</span>
             </h1>
             <p className="text-primary-foreground/60 text-lg max-w-2xl mx-auto leading-relaxed">
-              Your voice matters. Share your thoughts, concerns, or questions — Jaime reads every message personally.
+              Your voice matters. Share your thoughts, concerns, or questions — Jamie reads every message personally.
             </p>
             <div className="w-16 h-1 bg-primary mx-auto mt-8" />
           </motion.div>
@@ -203,7 +203,7 @@ const Contact = () => {
               <div className="bg-primary/5 rounded-xl p-8 border border-primary/10">
                 <h3 className="font-display font-bold text-foreground text-lg mb-4">Prefer Email?</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  You can always reach Jaime directly at his official email address.
+                  You can always reach Jamie directly at his official email address.
                 </p>
                 <a
                   href="mailto:jboucher@ellington-ct.gov"
@@ -241,7 +241,7 @@ const Contact = () => {
               { q: "How can I attend a Board of Selectmen meeting?", a: "Meetings are open to the public and typically held at Ellington Town Hall. Check the town website for the current schedule." },
               { q: "How do I register to vote in Ellington?", a: "You can register online through the CT Secretary of State's website, by mail, or in person at Town Hall. Visit our Voting Info page for details." },
               { q: "Can I volunteer for the campaign?", a: "Absolutely! Visit our Volunteer page to sign up. We need help with door knocking, phone banks, and community events." },
-              { q: "How do I report a town issue?", a: "For immediate town services, contact Ellington Town Hall directly. For policy concerns, feel free to reach out to Jaime through this contact form." },
+              { q: "How do I report a town issue?", a: "For immediate town services, contact Ellington Town Hall directly. For policy concerns, feel free to reach out to Jamie through this contact form." },
             ].map((faq, i) => (
               <motion.div
                 key={faq.q}

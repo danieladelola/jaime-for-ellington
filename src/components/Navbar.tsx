@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Home", to: "/" },
-  { label: "Meet Jaime", to: "/meet-jaime" },
+  { label: "Meet Jamie", to: "/meet-jaime" },
   { label: "Priorities", to: "/priorities" },
   { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
@@ -55,7 +55,7 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
             <span className="text-primary-foreground font-bold text-sm">JB</span>
           </div>
           <div>
-            <span className="text-lg leading-none block">Jamison Boucher</span>
+            <span className="text-lg leading-none block">Jamie Boucher</span>
             <span className={cn(
               "text-[10px] uppercase tracking-[0.15em] leading-none",
               isTransparent ? "text-primary-foreground/50" : "text-muted-foreground"

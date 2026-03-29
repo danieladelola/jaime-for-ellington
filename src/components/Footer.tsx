@@ -12,7 +12,7 @@ const Footer = () => (
               <span className="text-primary-foreground font-bold text-sm">JB</span>
             </div>
             <div>
-              <h3 className="font-display text-lg font-bold leading-none">Jamison Boucher</h3>
+              <h3 className="font-display text-lg font-bold leading-none">Jamie Boucher</h3>
               <span className="text-background/40 text-xs uppercase tracking-wider">Selectman</span>
             </div>
           </div>
@@ -34,7 +34,7 @@ const Footer = () => (
           <div className="flex flex-col gap-3 text-sm">
             {[
               { to: "/", label: "Home" },
-              { to: "/meet-jaime", label: "Meet Jaime" },
+              { to: "/meet-jaime", label: "Meet Jamie" },
               { to: "/priorities", label: "Priorities" },
               { to: "/blog", label: "Blog" },
             ].map((link) => (
@@ -50,7 +50,7 @@ const Footer = () => (
           <h4 className="font-display font-semibold mb-4 text-sm uppercase tracking-wider text-background/40">Get Involved</h4>
           <div className="flex flex-col gap-3 text-sm">
             {[
-              { to: "/contact", label: "Contact Jaime" },
+              { to: "/contact", label: "Contact Jamie" },
             ].map((link) => (
               <Link key={link.to} to={link.to} className="text-background/60 hover:text-background transition-colors flex items-center gap-1 group">
                 <ArrowRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200" />
@@ -77,7 +77,7 @@ const Footer = () => (
     {/* Bottom Bar */}
     <div className="border-t border-background/10">
       <div className="container mx-auto py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-background/35">
-        <p>© {new Date().getFullYear()} Jamison Boucher for Ellington. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Jamie Boucher for Ellington. All rights reserved.</p>
         
       </div>
     </div>

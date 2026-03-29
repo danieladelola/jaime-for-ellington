@@ -85,7 +85,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-primary-foreground leading-[1.05] mb-4"
             >
-              Jamison
+              Jamie
               <br />
               <span className="text-primary">Boucher</span>
             </motion.h1>
@@ -148,7 +148,7 @@ const Index = () => {
               <div className="relative">
                 <img
                   src={meetingImage}
-                  alt="Jaime Boucher at a selectmen meeting"
+                  alt="Jamie Boucher at a selectmen meeting"
                   className="rounded-lg w-full object-cover aspect-[4/3] shadow-2xl"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-primary text-primary-foreground p-6 rounded-lg shadow-xl hidden md:block">
@@ -166,7 +166,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-6"
             >
-              <p className="text-primary font-display font-semibold text-sm uppercase tracking-[0.15em]">About Jaime</p>
+              <p className="text-primary font-display font-semibold text-sm uppercase tracking-[0.15em]">About Jamie</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground leading-tight">
                 A Lifelong Resident Fighting for{" "}
                 <span className="text-primary">Ellington</span>
@@ -286,7 +286,7 @@ const Index = () => {
             </blockquote>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-px bg-primary" />
-              <p className="text-muted-foreground font-display font-semibold">Jamison Boucher, Selectman</p>
+              <p className="text-muted-foreground font-display font-semibold">Jamie Boucher, Selectman</p>
               <div className="w-12 h-px bg-primary" />
             </div>
           </motion.div>
@@ -324,7 +324,7 @@ const Index = () => {
                 </Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact">Contact Jaime</Link>
+                <Link to="/contact">Contact Jamie</Link>
               </Button>
             </div>
           </motion.div>
