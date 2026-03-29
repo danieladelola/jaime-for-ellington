@@ -275,7 +275,7 @@ const AdminEvents = () => {
                     )}
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className={cn("text-xs px-2 py-1 rounded-full font-medium", event.status === "published" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700")}>
+                    <span className={cn("text-xs px-2 py-1 rounded-full font-medium", event.status === "published" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground")}>
                       {event.status}
                     </span>
                     <button onClick={() => handleEdit(event)} className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
