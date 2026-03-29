@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, FileText, MessageSquare, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, FileText, MessageSquare, CalendarDays, LogOut, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 const sidebarLinks = [
   { label: "Dashboard", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Blog Posts", to: "/admin/blogs", icon: FileText },
+  { label: "Events", to: "/admin/events", icon: CalendarDays },
   { label: "Contacts", to: "/admin/contacts", icon: MessageSquare },
 ];
 

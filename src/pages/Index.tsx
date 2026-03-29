@@ -265,6 +265,8 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Events */}
+      <EventsSection />
 
 
       {/* Quote */}
