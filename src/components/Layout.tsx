@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import CalculatorModal from "./CalculatorModal";
 
 const Layout = () => {
   const location = useLocation();
@@ -14,7 +13,6 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
-      <CalculatorModal />
     </div>
   );
 };

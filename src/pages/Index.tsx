@@ -355,6 +355,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <TaxCalculatorModal open={calcOpen} onClose={() => setCalcOpen(false)} />
     </div>
   );
 };
