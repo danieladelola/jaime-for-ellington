@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapPin, Mail, Calendar } from "lucide-react";
+import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapPin, Mail, Calendar, Calculator } from "lucide-react";
+import TaxCalculatorModal from "@/components/TaxCalculatorModal";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-jamie.jpg";
 import meetingImage from "@/assets/jamie-meeting.jpg";
@@ -54,6 +56,8 @@ const fadeUp = {
 };
 
 const Index = () => {
+  const [calcOpen, setCalcOpen] = useState(false);
+
   return (
     <div>
       {/* Hero */}
@@ -109,8 +113,8 @@ const Index = () => {
                   Get Involved <ArrowRight className="ml-1 w-4 h-4" />
                 </Link>
               </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/priorities">View Priorities</Link>
+              <Button variant="heroOutline" size="lg" onClick={() => setCalcOpen(true)}>
+                <Calculator className="mr-1 w-4 h-4" /> Tax Calculator
               </Button>
             </motion.div>
 
@@ -351,6 +355,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <TaxCalculatorModal open={calcOpen} onClose={() => setCalcOpen(false)} />
     </div>
   );
 };
