@@ -113,8 +113,8 @@ const Index = () => {
                   Get Involved <ArrowRight className="ml-1 w-4 h-4" />
                 </Link>
               </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/priorities">View Priorities</Link>
+              <Button variant="heroOutline" size="lg" onClick={() => setCalcOpen(true)}>
+                <Calculator className="mr-1 w-4 h-4" /> Tax Calculator
               </Button>
             </motion.div>
 
