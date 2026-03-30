@@ -114,7 +114,7 @@ const AdminLayout = () => {
           </button>
           <p className="font-display font-bold text-foreground">Admin Panel</p>
         </header>
-        <main className="flex-1 p-6 lg:p-8 overflow-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden overflow-y-auto">
           <Outlet />
         </main>
       </div>

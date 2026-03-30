@@ -259,7 +259,7 @@ const AdminEvents = () => {
           {events.map((event) => (
             <div key={event.id} className="bg-card border border-border rounded-xl p-3 sm:p-5 flex gap-3 sm:gap-5 items-start hover:shadow-md transition-shadow overflow-hidden">
               {event.featured_image && (
-                <img src={event.featured_image} alt={event.title} className="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
+                <img src={event.featured_image} alt={event.title} className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg object-cover flex-shrink-0" />
               )}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3">
