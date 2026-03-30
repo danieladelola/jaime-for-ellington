@@ -56,6 +56,8 @@ const fadeUp = {
 };
 
 const Index = () => {
+  const [calcOpen, setCalcOpen] = useState(false);
+
   return (
     <div>
       {/* Hero */}
