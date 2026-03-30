@@ -195,7 +195,7 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                       <span
                         className={cn(
                           "font-display font-bold text-lg",
-                          difference < 0 ? "text-green-600" : difference > 0 ? "text-destructive" : "text-foreground"
+                          difference < 0 ? "text-primary" : difference > 0 ? "text-destructive" : "text-foreground"
                         )}
                       >
                         {difference <= 0 ? "" : "+"}
