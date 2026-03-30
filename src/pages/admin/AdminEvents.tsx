@@ -257,18 +257,18 @@ const AdminEvents = () => {
       ) : (
         <div className="grid gap-4">
           {events.map((event) => (
-            <div key={event.id} className="bg-card border border-border rounded-xl p-5 flex gap-5 items-start hover:shadow-md transition-shadow">
+            <div key={event.id} className="bg-card border border-border rounded-xl p-3 sm:p-5 flex gap-3 sm:gap-5 items-start hover:shadow-md transition-shadow overflow-hidden">
               {event.featured_image && (
-                <img src={event.featured_image} alt={event.title} className="w-24 h-24 rounded-lg object-cover flex-shrink-0" />
+                <img src={event.featured_image} alt={event.title} className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg object-cover flex-shrink-0" />
               )}
               <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-display font-bold text-foreground">{event.title}</h3>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3">
+                  <div className="min-w-0">
+                    <h3 className="font-display font-bold text-foreground text-sm sm:text-base truncate">{event.title}</h3>
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-muted-foreground mt-1">
                       <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {new Date(event.event_date).toLocaleDateString()}</span>
                       {event.event_time && <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {event.event_time}</span>}
-                      {event.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {event.location}</span>}
+                      {event.location && <span className="flex items-center gap-1 truncate max-w-[120px] sm:max-w-none"><MapPin className="w-3 h-3 flex-shrink-0" /> {event.location}</span>}
                     </div>
                     {event.short_description && (
                       <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{event.short_description}</p>
