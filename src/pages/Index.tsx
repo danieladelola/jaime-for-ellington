@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapPin, Mail, Calendar } from "lucide-react";
+import { Shield, Heart, Zap, Store, ArrowRight, Users, Quote, ChevronRight, MapPin, Mail, Calendar, Calculator } from "lucide-react";
+import TaxCalculatorModal from "@/components/TaxCalculatorModal";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-jamie.jpg";
 import meetingImage from "@/assets/jamie-meeting.jpg";
