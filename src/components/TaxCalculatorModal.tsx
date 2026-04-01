@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { X, Calculator, Info, Plus } from "lucide-react";
+import { X, Calculator, Info } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -27,22 +27,11 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
   const [currentRate, setCurrentRate] = useState(DEFAULT_CURRENT_RATE.toString());
   const [proposedRate, setProposedRate] = useState(DEFAULT_PROPOSED_RATE.toString());
   const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR.toString());
-  const [customYearInput, setCustomYearInput] = useState("");
-  const [extraYears, setExtraYears] = useState<number[]>([]);
   const [showRateInfo, setShowRateInfo] = useState(false);
 
   const years = useMemo(() => {
-    const all = new Set([...BASE_YEARS, ...extraYears]);
-    return Array.from(all).sort((a, b) => a - b);
-  }, [extraYears]);
-
-  const addCustomYear = () => {
-    const y = parseInt(customYearInput);
-    if (!y || customYearInput.length !== 4 || y < 1900 || y > 2100) return;
-    if (!years.includes(y)) setExtraYears((prev) => [...prev, y]);
-    setSelectedYear(y.toString());
-    setCustomYearInput("");
-  };
+    return Array.from(BASE_YEARS);
+  }, []);
 
   const assessed = parseFloat(propertyValue.replace(/,/g, "")) || 0;
   const current = parseFloat(currentRate) || 0;
@@ -119,32 +108,16 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
               {/* Year selector */}
               <div>
                 <Label className="text-sm font-medium text-foreground mb-1.5 block">Tax Year</Label>
-                <div className="flex gap-2">
-                  <Select value={selectedYear} onValueChange={setSelectedYear}>
-                    <SelectTrigger className="flex-1 h-10">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {years.map((y) => (
-                        <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    value={customYearInput}
-                    onChange={(e) => setCustomYearInput(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))}
-                    placeholder="Add year"
-                    className="w-24 h-10 text-sm"
-                    onKeyDown={(e) => e.key === "Enter" && addCustomYear()}
-                  />
-                  <button
-                    onClick={addCustomYear}
-                    disabled={customYearInput.length !== 4}
-                    className="h-10 px-3 rounded-md bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 disabled:opacity-40 hover:bg-primary/90 transition-colors"
-                  >
-                    <Plus className="w-3 h-3" />
-                  </button>
-                </div>
+                <Select value={selectedYear} onValueChange={setSelectedYear}>
+                  <SelectTrigger className="h-10 relative z-[110]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="z-[200]">
+                    {years.map((y) => (
+                      <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
