@@ -27,7 +27,6 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
   const [currentRate, setCurrentRate] = useState(DEFAULT_CURRENT_RATE.toString());
   const [proposedRate, setProposedRate] = useState(DEFAULT_PROPOSED_RATE.toString());
   const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR.toString());
-  const [customYearInput, setCustomYearInput] = useState("");
   const [extraYears, setExtraYears] = useState<number[]>([]);
   const [showRateInfo, setShowRateInfo] = useState(false);
 
