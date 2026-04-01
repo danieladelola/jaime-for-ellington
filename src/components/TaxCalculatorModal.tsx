@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { X, Calculator, Info, Plus } from "lucide-react";
+import { X, Calculator, Info } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
