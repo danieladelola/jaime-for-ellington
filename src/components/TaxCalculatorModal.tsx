@@ -17,18 +17,19 @@ interface TaxCalculatorModalProps {
   onClose: () => void;
 }
 
+const DEFAULT_CURRENT_RATE = 37.0;
+const DEFAULT_PROPOSED_RATE = 26.4;
 const CURRENT_YEAR = new Date().getFullYear();
 const BASE_YEARS = Array.from({ length: CURRENT_YEAR - 2010 + 1 }, (_, i) => 2010 + i);
 
 const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
-  const [assessedCurrent, setAssessedCurrent] = useState("");
-  const [millRateCurrent, setMillRateCurrent] = useState("26.4");
-  const [assessedPrevious, setAssessedPrevious] = useState("");
-  const [millRatePrevious, setMillRatePrevious] = useState("37.0");
-  const [previousYear, setPreviousYear] = useState((CURRENT_YEAR - 1).toString());
+  const [propertyValue, setPropertyValue] = useState("");
+  const [currentRate, setCurrentRate] = useState(DEFAULT_CURRENT_RATE.toString());
+  const [proposedRate, setProposedRate] = useState(DEFAULT_PROPOSED_RATE.toString());
+  const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR.toString());
   const [customYearInput, setCustomYearInput] = useState("");
   const [extraYears, setExtraYears] = useState<number[]>([]);
-  const [showInfo, setShowInfo] = useState(false);
+  const [showRateInfo, setShowRateInfo] = useState(false);
 
   const years = useMemo(() => {
     const all = new Set([...BASE_YEARS, ...extraYears]);
@@ -39,26 +40,26 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
     const y = parseInt(customYearInput);
     if (!y || customYearInput.length !== 4 || y < 1900 || y > 2100) return;
     if (!years.includes(y)) setExtraYears((prev) => [...prev, y]);
-    setPreviousYear(y.toString());
+    setSelectedYear(y.toString());
     setCustomYearInput("");
   };
 
-  const formatNum = (val: string) => {
+  const assessed = parseFloat(propertyValue.replace(/,/g, "")) || 0;
+  const current = parseFloat(currentRate) || 0;
+  const proposed = parseFloat(proposedRate) || 0;
+
+  const currentTax = (assessed * current) / 1000;
+  const proposedTax = (assessed * proposed) / 1000;
+  const difference = proposedTax - currentTax;
+
+  const formatCurrency = (val: number) =>
+    val.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
+
+  const formatInput = (val: string) => {
     const num = val.replace(/[^0-9]/g, "");
     if (!num) return "";
     return parseInt(num).toLocaleString("en-US");
   };
-
-  const parse = (val: string) => parseFloat(val.replace(/,/g, "")) || 0;
-
-  const currentTax = (parse(assessedCurrent) * parse(millRateCurrent)) / 1000;
-  const previousTax = (parse(assessedPrevious) * parse(millRatePrevious)) / 1000;
-  const difference = currentTax - previousTax;
-
-  const fmt = (v: number) =>
-    v.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
-
-  const hasResult = parse(assessedCurrent) > 0 && parse(assessedPrevious) > 0;
 
   return (
     <AnimatePresence>
@@ -77,20 +78,18 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative bg-card rounded-2xl shadow-2xl w-full max-w-lg overflow-y-auto max-h-[90vh] border border-border"
+            className="relative bg-card rounded-2xl shadow-2xl w-full max-w-md overflow-y-auto max-h-[90vh] border border-border"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 pt-5 pb-3 sticky top-0 bg-card z-10">
+            <div className="flex items-center justify-between px-6 pt-5 pb-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Calculator className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h2 className="font-display font-bold text-foreground text-lg leading-tight">
-                    Property Tax Estimator
-                  </h2>
-                  <p className="text-muted-foreground text-xs">Year-over-Year Comparison</p>
+                  <h2 className="font-display font-bold text-foreground text-lg leading-tight">Tax Calculator</h2>
+                  <p className="text-muted-foreground text-xs">Ellington Property Tax Estimator</p>
                 </div>
               </div>
               <button
@@ -101,134 +100,107 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
               </button>
             </div>
 
-            <div className="px-6 pb-6 space-y-5">
-              {/* Current Year Section */}
-              <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 space-y-3">
-                <h3 className="font-display font-bold text-primary text-sm uppercase tracking-wider">
-                  Current Year — {CURRENT_YEAR}
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <Label className="text-xs font-medium text-foreground mb-1 block">
-                      Assessed Value
-                    </Label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium">$</span>
-                      <Input
-                        value={assessedCurrent}
-                        onChange={(e) => setAssessedCurrent(formatNum(e.target.value))}
-                        placeholder="250,000"
-                        className="pl-7 h-10 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-1 mb-1">
-                      <Label className="text-xs font-medium text-foreground">Mill Rate</Label>
-                      <button
-                        onClick={() => setShowInfo(!showInfo)}
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <Info className="w-3 h-3" />
-                      </button>
-                    </div>
-                    <div className="relative">
-                      <Input
-                        value={millRateCurrent}
-                        onChange={(e) => setMillRateCurrent(e.target.value)}
-                        type="number"
-                        step="0.1"
-                        className="h-10 pr-12 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
-                    </div>
-                  </div>
+            {/* Rate badges */}
+            <div className="px-6 pb-3">
+              <div className="flex gap-3">
+                <div className="flex-1 bg-muted rounded-lg px-4 py-2.5 text-center">
+                  <p className="text-muted-foreground text-[10px] uppercase tracking-wider font-medium">Current Mill Rate</p>
+                  <p className="font-display font-bold text-foreground text-xl">{current.toFixed(1)}</p>
                 </div>
-                <div className="flex justify-between items-center bg-card rounded-lg px-3 py-2">
-                  <span className="text-muted-foreground text-sm">Estimated Tax</span>
-                  <span className="font-display font-bold text-primary text-lg">{fmt(currentTax)}</span>
+                <div className="flex-1 bg-primary/10 rounded-lg px-4 py-2.5 text-center">
+                  <p className="text-primary text-[10px] uppercase tracking-wider font-medium">Proposed Rate</p>
+                  <p className="font-display font-bold text-primary text-xl">{proposed.toFixed(1)}</p>
                 </div>
               </div>
+            </div>
 
-              {/* Previous Year Section */}
-              <div className="rounded-xl border border-border bg-muted/50 p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-display font-bold text-foreground text-sm uppercase tracking-wider">
-                    Previous Year — {previousYear}
-                  </h3>
-                  <Select value={previousYear} onValueChange={setPreviousYear}>
-                    <SelectTrigger className="w-28 h-8 text-xs">
+            {/* Form */}
+            <div className="px-6 py-4 space-y-4">
+              {/* Year selector */}
+              <div>
+                <Label className="text-sm font-medium text-foreground mb-1.5 block">Tax Year</Label>
+                <div className="flex gap-2">
+                  <Select value={selectedYear} onValueChange={setSelectedYear}>
+                    <SelectTrigger className="flex-1 h-10">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       {years.map((y) => (
-                        <SelectItem key={y} value={y.toString()}>
-                          {y}
-                        </SelectItem>
+                        <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                </div>
-
-                {/* Custom year entry */}
-                <div className="flex gap-2">
                   <Input
                     value={customYearInput}
-                    onChange={(e) => {
-                      const v = e.target.value.replace(/[^0-9]/g, "").slice(0, 4);
-                      setCustomYearInput(v);
-                    }}
-                    placeholder="Add year (e.g. 2008)"
-                    className="h-8 text-xs flex-1"
+                    onChange={(e) => setCustomYearInput(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))}
+                    placeholder="Add year"
+                    className="w-24 h-10 text-sm"
                     onKeyDown={(e) => e.key === "Enter" && addCustomYear()}
                   />
                   <button
                     onClick={addCustomYear}
                     disabled={customYearInput.length !== 4}
-                    className="h-8 px-3 rounded-md bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 disabled:opacity-40 hover:bg-primary/90 transition-colors"
+                    className="h-10 px-3 rounded-md bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 disabled:opacity-40 hover:bg-primary/90 transition-colors"
                   >
-                    <Plus className="w-3 h-3" /> Add
+                    <Plus className="w-3 h-3" />
                   </button>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <Label className="text-xs font-medium text-foreground mb-1 block">
-                      Assessed Value
-                    </Label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium">$</span>
-                      <Input
-                        value={assessedPrevious}
-                        onChange={(e) => setAssessedPrevious(formatNum(e.target.value))}
-                        placeholder="250,000"
-                        className="pl-7 h-10 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label className="text-xs font-medium text-foreground mb-1 block">Mill Rate</Label>
-                    <div className="relative">
-                      <Input
-                        value={millRatePrevious}
-                        onChange={(e) => setMillRatePrevious(e.target.value)}
-                        type="number"
-                        step="0.1"
-                        className="h-10 pr-12 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center bg-card rounded-lg px-3 py-2">
-                  <span className="text-muted-foreground text-sm">Estimated Tax</span>
-                  <span className="font-display font-bold text-foreground text-lg">{fmt(previousTax)}</span>
                 </div>
               </div>
 
-              {/* Info tooltip */}
+              <div>
+                <Label className="text-sm font-medium text-foreground mb-1.5 block">
+                  Assessed Property Value
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">$</span>
+                  <Input
+                    value={propertyValue}
+                    onChange={(e) => setPropertyValue(formatInput(e.target.value))}
+                    placeholder="e.g. 250,000"
+                    className="pl-7 h-12 text-lg font-medium"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <Label className="text-sm font-medium text-foreground">Current Rate</Label>
+                    <button
+                      onClick={() => setShowRateInfo(!showRateInfo)}
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Info className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      value={currentRate}
+                      onChange={(e) => setCurrentRate(e.target.value)}
+                      type="number"
+                      step="0.1"
+                      className="h-10 pr-12"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-foreground mb-1.5 block">Proposed Rate</Label>
+                  <div className="relative">
+                    <Input
+                      value={proposedRate}
+                      onChange={(e) => setProposedRate(e.target.value)}
+                      type="number"
+                      step="0.1"
+                      className="h-10 pr-12"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
+                  </div>
+                </div>
+              </div>
+
               <AnimatePresence>
-                {showInfo && (
+                {showRateInfo && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
@@ -236,53 +208,53 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                     className="overflow-hidden"
                   >
                     <p className="text-muted-foreground text-xs bg-muted rounded-lg p-3 leading-relaxed">
-                      A <strong>mill rate</strong> is the tax per $1,000 of assessed value.
-                      Formula: <em>Assessed Value × Mill Rate ÷ 1,000</em>.
+                      A <strong>mill rate</strong> is the amount of tax per $1,000 of assessed property value.
+                      For example, a mill rate of 37.0 means $37 in tax for every $1,000 of assessed value.
                     </p>
                   </motion.div>
                 )}
               </AnimatePresence>
+            </div>
 
-              {/* Result */}
-              {hasResult && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="rounded-xl p-5 space-y-3 border-2"
-                  style={{
-                    borderColor: difference > 0 ? "hsl(var(--destructive))" : "hsl(var(--primary))",
-                    background: difference > 0 ? "hsl(var(--destructive) / 0.05)" : "hsl(var(--primary) / 0.05)",
-                  }}
-                >
+            {/* Results */}
+            {assessed > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="px-6 pb-6"
+              >
+                <div className="bg-muted rounded-xl p-5 space-y-3">
                   <h3 className="font-display font-bold text-foreground text-sm uppercase tracking-wider">
-                    {difference >= 0 ? "Estimated Tax Increase" : "Estimated Tax Decrease"}
+                    Estimated Property Tax — {selectedYear}
                   </h3>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground text-sm">{CURRENT_YEAR} Tax</span>
-                      <span className="font-display font-bold text-foreground">{fmt(currentTax)}</span>
+                      <span className="text-muted-foreground text-sm">Current Tax</span>
+                      <span className="font-display font-bold text-foreground text-lg">{formatCurrency(currentTax)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground text-sm">{previousYear} Tax</span>
-                      <span className="font-display font-bold text-foreground">{fmt(previousTax)}</span>
+                      <span className="text-muted-foreground text-sm">New Tax</span>
+                      <span className="font-display font-bold text-primary text-lg">{formatCurrency(proposedTax)}</span>
                     </div>
-                    <div className="h-px bg-border" />
+                    <div className="h-px bg-border my-1" />
                     <div className="flex justify-between items-center">
-                      <span className="text-foreground text-sm font-medium">Difference</span>
+                      <span className="text-muted-foreground text-sm font-medium">
+                        {difference < 0 ? "Estimated Tax Decrease" : difference > 0 ? "Estimated Tax Increase" : "Difference"}
+                      </span>
                       <span
                         className={cn(
-                          "font-display font-bold text-xl",
-                          difference > 0 ? "text-destructive" : difference < 0 ? "text-primary" : "text-foreground"
+                          "font-display font-bold text-lg",
+                          difference < 0 ? "text-primary" : difference > 0 ? "text-destructive" : "text-foreground"
                         )}
                       >
-                        {difference > 0 ? "+" : ""}
-                        {fmt(difference)}
+                        {difference <= 0 ? "" : "+"}
+                        {formatCurrency(difference)}
                       </span>
                     </div>
                   </div>
-                </motion.div>
-              )}
-            </div>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       )}
