@@ -119,32 +119,16 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
               {/* Year selector */}
               <div>
                 <Label className="text-sm font-medium text-foreground mb-1.5 block">Tax Year</Label>
-                <div className="flex gap-2">
-                  <Select value={selectedYear} onValueChange={setSelectedYear}>
-                    <SelectTrigger className="flex-1 h-10">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {years.map((y) => (
-                        <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    value={customYearInput}
-                    onChange={(e) => setCustomYearInput(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))}
-                    placeholder="Add year"
-                    className="w-24 h-10 text-sm"
-                    onKeyDown={(e) => e.key === "Enter" && addCustomYear()}
-                  />
-                  <button
-                    onClick={addCustomYear}
-                    disabled={customYearInput.length !== 4}
-                    className="h-10 px-3 rounded-md bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 disabled:opacity-40 hover:bg-primary/90 transition-colors"
-                  >
-                    <Plus className="w-3 h-3" />
-                  </button>
-                </div>
+                <Select value={selectedYear} onValueChange={setSelectedYear}>
+                  <SelectTrigger className="h-10 relative z-[110]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="z-[200]">
+                    {years.map((y) => (
+                      <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
