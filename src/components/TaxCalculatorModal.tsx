@@ -27,21 +27,11 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
   const [currentRate, setCurrentRate] = useState(DEFAULT_CURRENT_RATE.toString());
   const [proposedRate, setProposedRate] = useState(DEFAULT_PROPOSED_RATE.toString());
   const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR.toString());
-  const [extraYears, setExtraYears] = useState<number[]>([]);
   const [showRateInfo, setShowRateInfo] = useState(false);
 
   const years = useMemo(() => {
-    const all = new Set([...BASE_YEARS, ...extraYears]);
-    return Array.from(all).sort((a, b) => a - b);
-  }, [extraYears]);
-
-  const addCustomYear = () => {
-    const y = parseInt(customYearInput);
-    if (!y || customYearInput.length !== 4 || y < 1900 || y > 2100) return;
-    if (!years.includes(y)) setExtraYears((prev) => [...prev, y]);
-    setSelectedYear(y.toString());
-    setCustomYearInput("");
-  };
+    return Array.from(BASE_YEARS);
+  }, []);
 
   const assessed = parseFloat(propertyValue.replace(/,/g, "")) || 0;
   const current = parseFloat(currentRate) || 0;
