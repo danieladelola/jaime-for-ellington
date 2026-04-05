@@ -5,11 +5,26 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface TaxCalculatorModalProps {
   open: boolean;
   onClose: () => void;
 }
+
+const PREVIOUS_YEARS = [
+  { year: "2022–2023", millRate: 32.5 },
+  { year: "2023–2024", millRate: 34.3 },
+  { year: "2024–2025", millRate: 36.0 },
+];
+
+const NEW_YEAR = { year: "2025–2026", millRate: 37.10 };
 
 const formatCurrency = (val: number) =>
   val.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
@@ -24,21 +39,31 @@ const parseFormattedNumber = (val: string) =>
   parseFloat(val.replace(/,/g, "")) || 0;
 
 const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
+  const [selectedPrevYear, setSelectedPrevYear] = useState(PREVIOUS_YEARS[PREVIOUS_YEARS.length - 1].year);
   const [prevAssessment, setPrevAssessment] = useState("");
-  const [prevMillRate, setPrevMillRate] = useState("");
+  const [prevMillRate, setPrevMillRate] = useState(
+    PREVIOUS_YEARS[PREVIOUS_YEARS.length - 1].millRate.toString()
+  );
   const [newAssessment, setNewAssessment] = useState("");
-  const [newMillRate, setNewMillRate] = useState("");
+  const [newMillRate, setNewMillRate] = useState(NEW_YEAR.millRate.toString());
   const [calculated, setCalculated] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const prevAssessedVal = parseFormattedNumber(prevAssessment);
   const prevMillVal = parseFloat(prevMillRate) || 0;
-  const newAssessedVal = parseFormattedNumber(newAssessment);
   const newMillVal = parseFloat(newMillRate) || 0;
+  const prevAssessedVal = parseFormattedNumber(prevAssessment);
+  const newAssessedVal = parseFormattedNumber(newAssessment);
 
   const prevTax = (prevAssessedVal * prevMillVal) / 1000;
   const newTax = (newAssessedVal * newMillVal) / 1000;
   const difference = newTax - prevTax;
+
+  const handlePrevYearChange = (year: string) => {
+    setSelectedPrevYear(year);
+    const match = PREVIOUS_YEARS.find((y) => y.year === year);
+    if (match) setPrevMillRate(match.millRate.toString());
+    setCalculated(false);
+  };
 
   const validate = useCallback(() => {
     const e: Record<string, string> = {};
@@ -55,10 +80,11 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
   };
 
   const handleReset = () => {
+    setSelectedPrevYear(PREVIOUS_YEARS[PREVIOUS_YEARS.length - 1].year);
     setPrevAssessment("");
-    setPrevMillRate("");
+    setPrevMillRate(PREVIOUS_YEARS[PREVIOUS_YEARS.length - 1].millRate.toString());
     setNewAssessment("");
-    setNewMillRate("");
+    setNewMillRate(NEW_YEAR.millRate.toString());
     setCalculated(false);
     setErrors({});
   };
@@ -118,8 +144,25 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                 <div className="space-y-3 p-4 rounded-xl bg-muted/50 border border-border">
                   <h3 className="font-display font-bold text-foreground text-sm text-center">
                     Previous Year
-                    <span className="block text-muted-foreground text-xs font-normal mt-0.5">(2024–2025)</span>
                   </h3>
+
+                  <div>
+                    <Label className="text-xs font-medium text-foreground mb-1 block">
+                      Select Year
+                    </Label>
+                    <Select value={selectedPrevYear} onValueChange={handlePrevYearChange}>
+                      <SelectTrigger className="h-10 z-[110]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="z-[200]">
+                        {PREVIOUS_YEARS.map((y) => (
+                          <SelectItem key={y.year} value={y.year}>
+                            {y.year}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
                   <div>
                     <Label className="text-xs font-medium text-foreground mb-1 block">
@@ -153,7 +196,7 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                         }}
                         type="number"
                         step="0.01"
-                        placeholder="e.g. 37.0"
+                        placeholder="e.g. 36.0"
                         className={cn("h-10 pr-12", errors.prevMillRate && "border-destructive")}
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
@@ -166,7 +209,7 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                 <div className="space-y-3 p-4 rounded-xl bg-primary/5 border border-primary/20">
                   <h3 className="font-display font-bold text-primary text-sm text-center">
                     New Year
-                    <span className="block text-primary/70 text-xs font-normal mt-0.5">(2025–2026)</span>
+                    <span className="block text-primary/70 text-xs font-normal mt-0.5">({NEW_YEAR.year})</span>
                   </h3>
 
                   <div>
@@ -201,7 +244,7 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                         }}
                         type="number"
                         step="0.01"
-                        placeholder="e.g. 26.4"
+                        placeholder="e.g. 37.10"
                         className={cn("h-10 pr-12", errors.newMillRate && "border-destructive")}
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">mills</span>
@@ -240,11 +283,11 @@ const TaxCalculatorModal = ({ open, onClose }: TaxCalculatorModalProps) => {
                       </h3>
                       <div className="space-y-2.5">
                         <div className="flex justify-between items-center">
-                          <span className="text-muted-foreground text-sm">Previous Year Tax (2024–2025)</span>
+                          <span className="text-muted-foreground text-sm">Previous Year Tax ({selectedPrevYear})</span>
                           <span className="font-display font-bold text-foreground text-lg">{formatCurrency(prevTax)}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-muted-foreground text-sm">New Year Tax (2025–2026)</span>
+                          <span className="text-muted-foreground text-sm">New Year Tax ({NEW_YEAR.year})</span>
                           <span className="font-display font-bold text-primary text-lg">{formatCurrency(newTax)}</span>
                         </div>
                         <div className="h-px bg-border my-1" />
